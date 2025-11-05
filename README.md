@@ -6,6 +6,31 @@ Files added:
 - `todo.cpp` — single-file C++ implementation with `Task` and `TaskList` classes and an interactive CLI.
 - `Makefile` — build file to compile the program with g++.
 
+## Created from this UML:
+```
+@startuml
+participant user
+participant taskList
+
+activate user
+user -> taskList: addTask(task)
+create task
+taskList -> task : create
+taskList -> taskList : add task to list
+taskList -> user
+user -> taskList : markComplete(name)
+taskList -> task : markComplete(name)
+task -> user
+
+user -> taskList : removeTask(name)
+task -> taskList : deleteTask()
+destroy task
+
+
+deactivate user
+@enduml
+```
+
 Build and run
 ```
 make
@@ -29,5 +54,3 @@ Walk dog
 5
 EOF
 ```
-
-Next steps: add unit tests, persistence (save/load), or a small GUI.
